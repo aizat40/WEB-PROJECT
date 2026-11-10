@@ -1,9 +1,9 @@
 <?php
 // Copy to local.php, then use your XAMPP or InfinityFree credentials.
 return [
-    'host' => '127.0.0.1',
+    'host' => 'sql207.infinityfree.com',
     'port' => 3306,
-    'name' => 'bugs_management',
-    'user' => 'root',
-    'password' => '',
+    'name' => 'if0_39058318_bugs_management',
+    'user' => 'if0_39058318',
+    'password' => 'Aizat1501',
 ];
