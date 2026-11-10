@@ -21,11 +21,11 @@ function pagination_controls()
     unset($params['page'], $params['per_page']);
     $params = array_filter($params, 'is_scalar');
     $url = function ($number) use ($params, $size) { return '?' . http_build_query(array_merge($params, ['per_page'=>$size,'page'=>$number])); };
-    echo '<div class="table-pagination"><span>Showing ' . ($total ? $offset + 1 : 0) . '–' . min($total, $offset + $size) . ' of ' . $total . ' records · Page ' . $page . ' of ' . $pages . '</span><form method="get" class="page-size-form">';
+    echo '<footer class="table-pagination"><p class="pagination-info">Showing ' . ($total ? $offset + 1 : 0) . '–' . min($total, $offset + $size) . ' of ' . $total . ' records<span class="visually-hidden"> · Page ' . $page . ' of ' . $pages . '</span></p><div class="pagination-actions"><form method="get" class="page-size-form">';
     foreach ($params as $key=>$value) echo '<input type="hidden" name="' . e($key) . '" value="' . e($value) . '">';
-    echo '<input type="hidden" name="page" value="1"><label>Rows per page <select name="per_page" class="form-select form-select-sm">';
+    echo '<input type="hidden" name="page" value="1"><label><span>Rows per page</span><select name="per_page" class="form-select form-select-sm">';
     foreach ([10,25,50,100] as $option) echo '<option value="'.$option.'"'.($option === $size ? ' selected' : '').'>'.$option.'</option>';
-    echo '</select></label><button class="btn btn-sm btn-light">Apply</button></form><nav aria-label="Table pages"><ul class="pagination mb-0">';
+    echo '</select></label><button type="submit" class="btn btn-sm btn-light">Apply</button></form><nav aria-label="Table pages"><ul class="pagination mb-0">';
     $link = function ($number, $label, $disabled = false) use ($url, $page) {
         echo '<li class="page-item'.($disabled ? ' disabled' : ($number === $page && is_int($label) ? ' active' : '')).'">';
         if ($disabled) echo '<span class="page-link" aria-disabled="true">'.e($label).'</span>';
@@ -37,5 +37,5 @@ function pagination_controls()
     $previous=0;
     foreach ($numbers as $number) { if ($previous && $number > $previous+1) echo '<li class="page-item disabled"><span class="page-link">…</span></li>'; $link($number,$number); $previous=$number; }
     $link($page+1, 'Next', $page === $pages);
-    echo '</ul></nav></div>';
+    echo '</ul></nav></div></footer>';
 }
