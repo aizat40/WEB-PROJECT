@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/app.js" defer></script>
 </head>
-<body>
+<body<?= $current_page === 'verify' ? ' class="verification-page"' : '' ?>>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="app-shell">
 <?php require __DIR__ . '/sidebar.php'; ?>

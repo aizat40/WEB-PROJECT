@@ -47,7 +47,7 @@ try {
         // One snapshot keeps all displayed counts and latest records consistent.
         database()->query('START TRANSACTION WITH CONSISTENT SNAPSHOT');
         try {
-            $verification = row('SELECT DATABASE() AS database_name, (SELECT COUNT(*) FROM bugs) AS bug_count, (SELECT COUNT(*) FROM bug_history) AS history_count');
+            $verification = row('SELECT (SELECT COUNT(*) FROM bugs) AS bug_count, (SELECT COUNT(*) FROM bug_history) AS history_count');
             $latest_bug = row('SELECT * FROM bugs ORDER BY reported_at DESC, id DESC LIMIT 1');
             $latest_change = row('SELECT h.*, b.title FROM bug_history h JOIN bugs b ON b.id = h.bug_id ORDER BY h.changed_at DESC, h.id DESC LIMIT 1');
             database()->commit();
@@ -73,7 +73,7 @@ try {
 }
 require __DIR__ . '/../includes/header.php';
 if ($database_error) {
-    require __DIR__ . '/unavailable.php';
+    require __DIR__ . ($current_page === 'verify' ? '/verify-unavailable.php' : '/unavailable.php');
 } elseif ($not_found) {
     echo '<section class="panel empty-state"><i class="bi bi-search" aria-hidden="true"></i><h2>Bug not found</h2><p>This record does not exist.</p><a href="active.php" class="btn btn-primary">View active bugs</a></section>';
 } else {

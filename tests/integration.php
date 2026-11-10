@@ -69,7 +69,8 @@ function stats($html)
 $failed = false;
 try {
     [$code, $html] = request('verify.php');
-    check($code === 200 && str_contains($html, htmlspecialchars($test_name)), 'HTTP server uses the isolated test database');
+    check($code === 200 && str_contains($html, '>8</strong>') && str_contains($html, '>7</strong>'), 'Verification displays current record totals');
+    check(!preg_match('/database|mysql|connected|connection|bug_management|' . preg_quote($test_name, '/') . '/i', strip_tags($html)), 'Verification exposes no database details or connection messages');
     foreach (['index.php', 'report.php', 'active.php', 'resolved.php', 'history.php', 'verify.php', 'bug.php?id=1'] as $path) {
         [$code, $html] = request($path);
         check($code === 200 && !str_contains($html, 'Database unavailable'), 'Page loads: ' . $path);
