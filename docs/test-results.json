@@ -1,0 +1,179 @@
+{
+    "date": "2026-11-10T14:39:10+01:00",
+    "database": "bugtrack_integration_test",
+    "checks": [
+        {
+            "test": "HTTP server uses the isolated test database",
+            "passed": true
+        },
+        {
+            "test": "Page loads: index.php",
+            "passed": true
+        },
+        {
+            "test": "Page loads: report.php",
+            "passed": true
+        },
+        {
+            "test": "Page loads: active.php",
+            "passed": true
+        },
+        {
+            "test": "Page loads: resolved.php",
+            "passed": true
+        },
+        {
+            "test": "Page loads: history.php",
+            "passed": true
+        },
+        {
+            "test": "Page loads: verify.php",
+            "passed": true
+        },
+        {
+            "test": "Page loads: bug.php?id=1",
+            "passed": true
+        },
+        {
+            "test": "Dashboard displays seeded MySQL totals",
+            "passed": true
+        },
+        {
+            "test": "Malformed bug reference returns 404",
+            "passed": true
+        },
+        {
+            "test": "Missing bug returns 404",
+            "passed": true
+        },
+        {
+            "test": "GET cannot change a status",
+            "passed": true
+        },
+        {
+            "test": "Report form includes session CSRF token",
+            "passed": true
+        },
+        {
+            "test": "Invalid report CSRF rejected without write",
+            "passed": true
+        },
+        {
+            "test": "Invalid fields rejected without write #14",
+            "passed": true
+        },
+        {
+            "test": "Invalid fields rejected without write #15",
+            "passed": true
+        },
+        {
+            "test": "Invalid fields rejected without write #16",
+            "passed": true
+        },
+        {
+            "test": "Invalid fields rejected without write #17",
+            "passed": true
+        },
+        {
+            "test": "Invalid fields rejected without write #18",
+            "passed": true
+        },
+        {
+            "test": "Invalid fields rejected without write #19",
+            "passed": true
+        },
+        {
+            "test": "Save Low priority; server sets Open and report time",
+            "passed": true
+        },
+        {
+            "test": "Save Medium priority; server sets Open and report time",
+            "passed": true
+        },
+        {
+            "test": "Save High priority; server sets Open and report time",
+            "passed": true
+        },
+        {
+            "test": "Reporting alone adds no misleading status-change history",
+            "passed": true
+        },
+        {
+            "test": "Stored markup and apostrophes are escaped and retained",
+            "passed": true
+        },
+        {
+            "test": "Invalid update CSRF rejected",
+            "passed": true
+        },
+        {
+            "test": "Open advances only to In Progress despite tampered target",
+            "passed": true
+        },
+        {
+            "test": "Status persists across refresh; refresh creates no history",
+            "passed": true
+        },
+        {
+            "test": "Duplicate stale update does not advance twice",
+            "passed": true
+        },
+        {
+            "test": "Failed history insert rolls back status update",
+            "passed": true
+        },
+        {
+            "test": "In Progress advances to Resolved",
+            "passed": true
+        },
+        {
+            "test": "Resolved issue moves lists and database record remains",
+            "passed": true
+        },
+        {
+            "test": "History preserves both transitions with timestamps",
+            "passed": true
+        },
+        {
+            "test": "Resolved issue cannot be changed or reopened",
+            "passed": true
+        },
+        {
+            "test": "Dashboard totals change after real submissions and workflow",
+            "passed": true
+        },
+        {
+            "test": "Resolved history remains visible",
+            "passed": true
+        },
+        {
+            "test": "Verification reads live totals, latest bug, and latest change",
+            "passed": true
+        },
+        {
+            "test": "Local asset available: assets\/css\/style.css",
+            "passed": true
+        },
+        {
+            "test": "Local asset available: assets\/js\/app.js",
+            "passed": true
+        },
+        {
+            "test": "Local asset available: assets\/vendor\/bootstrap.min.css",
+            "passed": true
+        },
+        {
+            "test": "Local asset available: assets\/vendor\/bootstrap-icons.min.css",
+            "passed": true
+        },
+        {
+            "test": "Local asset available: assets\/vendor\/fonts\/bootstrap-icons.woff2",
+            "passed": true
+        },
+        {
+            "test": "Local asset available: assets\/images\/favicon.svg",
+            "passed": true
+        }
+    ],
+    "passed": true
+}
