@@ -1,5 +1,6 @@
 <?php
 // Load data before sending HTML so failures can return the correct HTTP status.
+require_once __DIR__ . '/../includes/pagination.php';
 $database_error = false;
 $not_found = false;
 $errors = [];
@@ -38,11 +39,11 @@ try {
         $recent = rows('SELECT * FROM bugs ORDER BY reported_at DESC, id DESC LIMIT 5');
         $activity = rows('SELECT h.*, b.title FROM bug_history h JOIN bugs b ON b.id = h.bug_id ORDER BY h.changed_at DESC, h.id DESC LIMIT 4');
     } elseif ($current_page === 'active') {
-        $bugs = rows("SELECT * FROM bugs WHERE status IN ('Open', 'In Progress') ORDER BY FIELD(priority, 'High', 'Medium', 'Low'), reported_at DESC, id DESC");
+        $bugs = paginated_rows("bugs WHERE status IN ('Open', 'In Progress')", "FIELD(priority, 'High', 'Medium', 'Low'), reported_at DESC, id DESC");
     } elseif ($current_page === 'resolved') {
-        $bugs = rows("SELECT * FROM bugs WHERE status = 'Resolved' ORDER BY updated_at DESC, id DESC");
+        $bugs = paginated_rows("bugs WHERE status = 'Resolved'", "updated_at DESC, id DESC");
     } elseif ($current_page === 'history') {
-        $history = rows('SELECT h.*, b.title FROM bug_history h JOIN bugs b ON b.id = h.bug_id ORDER BY h.changed_at DESC, h.id DESC');
+        $history = paginated_rows('bug_history h JOIN bugs b ON b.id = h.bug_id', 'h.changed_at DESC, h.id DESC', '', [], 'h.*, b.title');
     } elseif ($current_page === 'verify') {
         // One snapshot keeps all displayed counts and latest records consistent.
         database()->query('START TRANSACTION WITH CONSISTENT SNAPSHOT');
@@ -63,7 +64,7 @@ try {
             http_response_code(404);
         } else {
             $current_page = $bug['status'] === 'Resolved' ? 'resolved' : 'active';
-            $history = rows('SELECT * FROM bug_history WHERE bug_id = ? ORDER BY changed_at DESC, id DESC', 'i', [$id]);
+            $history = paginated_rows('bug_history WHERE bug_id = ?', 'changed_at DESC, id DESC', 'i', [$id]);
         }
     }
 } catch (Throwable $exception) {
